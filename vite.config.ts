@@ -8,6 +8,11 @@ export default defineConfig(({ mode }) => {
   return {
     plugins: [react()],
     server: { proxy: { '/api': { target: env.VITE_API_PROXY_TARGET || 'http://localhost:5213', changeOrigin: true } } },
-    test: { environment: 'jsdom', setupFiles: './src/test/setup.ts', globals: true },
+    test: {
+      environment: 'jsdom',
+      setupFiles: './src/test/setup.ts',
+      globals: true,
+      exclude: ['**/.kilo/**', '**/dist/**', '**/node_modules/**', '**/coverage/**'],
+    },
   }
 })

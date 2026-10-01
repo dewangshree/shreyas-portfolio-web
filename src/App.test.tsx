@@ -7,17 +7,19 @@ const quote = { text: 'Simplicity is the soul of efficiency.', author: 'Austin F
 describe('portfolio', () => {
   beforeEach(() => vi.restoreAllMocks())
 
-  it('renders the full name', () => {
+  it('renders the full name', async () => {
     vi.stubGlobal('fetch', vi.fn().mockResolvedValue({ ok: true, json: async () => quote }))
     render(<App />)
     expect(screen.getByRole('heading', { name: 'Shreyas Vikrant Dewangswami' })).toBeInTheDocument()
+    await screen.findByRole('blockquote')
   })
 
-  it('renders the project cards', () => {
+  it('renders the project cards', async () => {
     vi.stubGlobal('fetch', vi.fn().mockResolvedValue({ ok: true, json: async () => quote }))
     render(<App />)
     expect(screen.getByRole('heading', { name: 'Developer Portfolio' })).toBeInTheDocument()
     expect(screen.getByRole('heading', { name: 'Task Management System' })).toBeInTheDocument()
+    await screen.findByRole('blockquote')
   })
 
   it('shows a loading state while the quote is requested', () => {
