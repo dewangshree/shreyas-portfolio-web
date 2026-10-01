@@ -1,0 +1,2 @@
+const navigation = [['About', '#about'], ['Skills', '#skills'], ['Projects', '#projects'], ['Contact', '#contact']]
+export function Header() { return <header className="site-header"><a className="brand" href="#top" aria-label="Shreyas Vikrant Dewangswami home">SVD</a><nav aria-label="Primary navigation"><ul className="nav-list">{navigation.map(([label, href]) => <li key={href}><a href={href}>{label}</a></li>)}</ul></nav></header> }
