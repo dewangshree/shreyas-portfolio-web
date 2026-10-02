@@ -42,6 +42,28 @@ pipeline {
             }
         }
 
+        stage('Deploy') {
+            steps {
+                sh '''
+                    set -e
+
+                    echo "Cleaning existing Shreyas Portfolio frontend files..."
+                    ssh -i ~/.ssh/shree shree@54.37.159.71 \
+                      'rm -rf /var/www/shreyas-portfolio/frontend/*'
+
+                    echo "Deploying new frontend build..."
+                    scp -i ~/.ssh/shree -r dist/. \
+                      shree@54.37.159.71:/var/www/shreyas-portfolio/frontend/
+
+                    echo "Checking deployed website..."
+                    curl --fail --silent --show-error \
+                      https://shreyasportfolio.hopto.org/ > /dev/null
+
+                    echo "Frontend deployment successful."
+                '''
+            }
+        }
+
         stage('Archive') {
             steps {
                 archiveArtifacts artifacts: 'dist/**', fingerprint: true
@@ -51,11 +73,11 @@ pipeline {
 
     post {
         success {
-            echo 'Frontend CI completed successfully.'
+            echo 'Frontend CI/CD completed successfully.'
         }
 
         failure {
-            echo 'Frontend CI failed.'
+            echo 'Frontend CI/CD failed.'
         }
     }
 }
