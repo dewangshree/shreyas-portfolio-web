@@ -49,10 +49,11 @@ pipeline {
 
                     withSonarQubeEnv('SonarQube') {
                         sh """
-                            ${scannerHome}/bin/sonar-scanner \
+                            "${scannerHome}/bin/sonar-scanner" \
                               -Dsonar.projectKey=dewangshree_shreyas-portfolio-web_4ec5ac87-4823-4fb0-8a9b-addb46b6b1db \
                               -Dsonar.sources=src \
-                              -Dsonar.sourceEncoding=UTF-8
+                              -Dsonar.sourceEncoding=UTF-8 \
+                              -Dsonar.nodejs.executable=/usr/local/bin/node
                         """
                     }
                 }
