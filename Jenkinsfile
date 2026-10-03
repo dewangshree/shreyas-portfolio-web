@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        PATH = "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:${env.PATH}"
+        PATH = "/Applications/Docker.app/Contents/Resources/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:${env.PATH}"
     }
 
     options {
@@ -68,7 +68,7 @@ pipeline {
         stage('Docker Build') {
             steps {
                 sh '''
-                    /usr/local/bin/docker build \
+                    docker build \
                       -t shreyas-portfolio-frontend:${BUILD_NUMBER} \
                       -t shreyas-portfolio-frontend:latest \
                       .
@@ -101,7 +101,7 @@ pipeline {
 
     post {
         success {
-            echo 'Frontend CI/CD + SonarQube completed successfully.'
+            echo 'Frontend CI/CD + SonarQube + Docker completed successfully.'
         }
 
         failure {
