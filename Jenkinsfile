@@ -17,16 +17,13 @@ pipeline {
             }
         }
 
-        stage('Verify Node') {
-            steps {
-                sh 'node --version'
-                sh 'npm --version'
-            }
-        }
-
         stage('Install') {
             steps {
-                sh 'npm ci'
+                sh '''
+                    node --version
+                    npm --version
+                    npm ci --prefer-offline --no-audit --no-fund
+                '''
             }
         }
 
@@ -68,31 +65,36 @@ pipeline {
             }
         }
 
+        stage('Docker Build') {
+            steps {
+                sh '''
+                    /usr/local/bin/docker build \
+                      -t shreyas-portfolio-frontend:${BUILD_NUMBER} \
+                      -t shreyas-portfolio-frontend:latest \
+                      .
+                '''
+            }
+        }
+
         stage('Deploy') {
             steps {
                 sh '''
                     set -e
 
-                    echo "Cleaning existing Shreyas Portfolio frontend files..."
-                    ssh -i ~/.ssh/shree shree@54.37.159.71 \
-                      'rm -rf /var/www/shreyas-portfolio/frontend/*'
+                    echo "Deploying frontend with rsync..."
 
-                    echo "Deploying new frontend build..."
-                    scp -i ~/.ssh/shree -r dist/. \
+                    rsync -az --delete \
+                      -e "ssh -i ~/.ssh/shree" \
+                      dist/ \
                       shree@54.37.159.71:/var/www/shreyas-portfolio/frontend/
 
                     echo "Checking deployed website..."
+
                     curl --fail --silent --show-error \
                       https://shreyasportfolio.hopto.org/ > /dev/null
 
                     echo "Frontend deployment successful."
                 '''
-            }
-        }
-
-        stage('Archive') {
-            steps {
-                archiveArtifacts artifacts: 'dist/**', fingerprint: true
             }
         }
     }
