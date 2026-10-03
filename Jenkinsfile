@@ -42,6 +42,31 @@ pipeline {
             }
         }
 
+        stage('SonarQube Analysis') {
+            steps {
+                script {
+                    def scannerHome = tool 'SonarQube Scanner'
+
+                    withSonarQubeEnv('SonarQube') {
+                        sh """
+                            ${scannerHome}/bin/sonar-scanner \
+                              -Dsonar.projectKey=dewangshree_shreyas-portfolio-web_4ec5ac87-4823-4fb0-8a9b-addb46b6b1db \
+                              -Dsonar.sources=src \
+                              -Dsonar.sourceEncoding=UTF-8
+                        """
+                    }
+                }
+            }
+        }
+
+        stage('Quality Gate') {
+            steps {
+                timeout(time: 5, unit: 'MINUTES') {
+                    waitForQualityGate abortPipeline: true
+                }
+            }
+        }
+
         stage('Deploy') {
             steps {
                 sh '''
@@ -73,7 +98,7 @@ pipeline {
 
     post {
         success {
-            echo 'Frontend CI/CD completed successfully.'
+            echo 'Frontend CI/CD + SonarQube completed successfully.'
         }
 
         failure {
