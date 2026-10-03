@@ -76,24 +76,43 @@ pipeline {
             }
         }
 
-        stage('Deploy') {
+        stage('Docker Deploy') {
             steps {
                 sh '''
                     set -e
 
-                    echo "Deploying frontend with rsync..."
+                    echo "Sending frontend Docker image to server..."
 
-                    rsync -az --delete \
-                      -e "ssh -i ~/.ssh/shree" \
-                      dist/ \
-                      shree@54.37.159.71:/var/www/shreyas-portfolio/frontend/
+                    docker save shreyas-portfolio-frontend:${BUILD_NUMBER} | gzip | \
+                    ssh -i ~/.ssh/shree shree@54.37.159.71 \
+                      'gunzip | sudo docker load'
 
-                    echo "Checking deployed website..."
+                    echo "Replacing frontend container on server..."
+
+                    ssh -i ~/.ssh/shree shree@54.37.159.71 "
+                        sudo docker rm -f shreyas-portfolio-frontend 2>/dev/null || true
+
+                        sudo docker run -d \
+                          --name shreyas-portfolio-frontend \
+                          --restart unless-stopped \
+                          -p 127.0.0.1:8083:80 \
+                          shreyas-portfolio-frontend:${BUILD_NUMBER}
+                    "
+
+                    echo "Waiting for frontend container..."
+                    sleep 3
+
+                    echo "Checking frontend Docker container..."
+
+                    ssh -i ~/.ssh/shree shree@54.37.159.71 \
+                      'curl --fail --silent --show-error http://127.0.0.1:8083/ > /dev/null'
+
+                    echo "Checking public website..."
 
                     curl --fail --silent --show-error \
                       https://shreyasportfolio.hopto.org/ > /dev/null
 
-                    echo "Frontend deployment successful."
+                    echo "Frontend Docker deployment successful."
                 '''
             }
         }
@@ -101,7 +120,7 @@ pipeline {
 
     post {
         success {
-            echo 'Frontend CI/CD + SonarQube + Docker completed successfully.'
+            echo 'Frontend CI/CD + SonarQube + Docker deployment completed successfully.'
         }
 
         failure {
