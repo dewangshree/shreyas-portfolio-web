@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        PATH = "/Applications/Docker.app/Contents/Resources/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:${env.PATH}"
+        PATH = "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:${env.PATH}"
     }
 
     options {
@@ -65,31 +65,36 @@ pipeline {
             }
         }
 
-        stage('Docker Build') {
-            steps {
-                sh '''
-                    docker build \
-                      -t shreyas-portfolio-frontend:${BUILD_NUMBER} \
-                      -t shreyas-portfolio-frontend:latest \
-                      .
-                '''
-            }
-        }
-
-        stage('Docker Deploy') {
+        stage('Docker Build & Deploy') {
             steps {
                 sh '''
                     set -e
 
-                    echo "Sending frontend Docker image to server..."
+                    echo "Syncing frontend source code to server..."
 
-                    docker save shreyas-portfolio-frontend:${BUILD_NUMBER} | gzip | \
-                    ssh -i ~/.ssh/shree shree@54.37.159.71 \
-                      'gunzip | sudo docker load'
+                    rsync -az --delete \
+                      --exclude '.git' \
+                      --exclude 'node_modules' \
+                      --exclude 'dist' \
+                      --exclude '.scannerwork' \
+                      -e "ssh -i ~/.ssh/shree" \
+                      ./ \
+                      shree@54.37.159.71:/home/shree/shreyas-portfolio-frontend-build/
 
-                    echo "Replacing frontend container on server..."
+                    echo "Building frontend Docker image on server..."
 
                     ssh -i ~/.ssh/shree shree@54.37.159.71 "
+                        set -e
+
+                        cd /home/shree/shreyas-portfolio-frontend-build
+
+                        sudo docker build \
+                          -t shreyas-portfolio-frontend:${BUILD_NUMBER} \
+                          -t shreyas-portfolio-frontend:latest \
+                          .
+
+                        echo 'Replacing frontend container...'
+
                         sudo docker rm -f shreyas-portfolio-frontend 2>/dev/null || true
 
                         sudo docker run -d \
@@ -112,7 +117,7 @@ pipeline {
                     curl --fail --silent --show-error \
                       https://shreyasportfolio.hopto.org/ > /dev/null
 
-                    echo "Frontend Docker deployment successful."
+                    echo "Frontend server-side Docker build and deployment successful."
                 '''
             }
         }
@@ -120,7 +125,7 @@ pipeline {
 
     post {
         success {
-            echo 'Frontend CI/CD + SonarQube + Docker deployment completed successfully.'
+            echo 'Frontend CI/CD + SonarQube + server-side Docker deployment completed successfully.'
         }
 
         failure {
