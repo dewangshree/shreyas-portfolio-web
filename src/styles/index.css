@@ -1,7 +1,8 @@
-:root { color: #1b2635; background: #f7f9fc; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-synthesis: none; }
+:root { --page-bg: #f7f9fc; --text: #1b2635; --heading: #10243d; --copy: #4b5d72; --accent: #1261ad; --accent-hover: #0d4d89; --muted-bg: #edf2f8; --card-bg: #fff; --border: #d6e0eb; --secondary-border: #b8c7d8; --secondary-text: #173754; --subtle-text: #687b91; --tag-bg: #e7f0fa; --tag-text: #1c568d; --shadow: rgba(33, 65, 97, .06); --background-overlay: rgba(247, 249, 252, .9); --theme-duration: 240ms; color: var(--text); color-scheme: light; background: var(--page-bg); font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-synthesis: none; }
+:root[data-theme='dark'] { --page-bg: #081525; --text: #dbe7f3; --heading: #f4f8fc; --copy: #b4c4d6; --accent: #55a8f4; --accent-hover: #83c1ff; --muted-bg: #0d2238; --card-bg: #122b45; --border: #284765; --secondary-border: #365878; --secondary-text: #e3edf8; --subtle-text: #9eb0c4; --tag-bg: #193b5b; --tag-text: #b9dbff; --shadow: rgba(0, 0, 0, .22); --background-overlay: rgba(8, 21, 37, .86); color-scheme: dark; }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
-body { margin: 0; min-width: 320px; }
+body { background: var(--page-bg); margin: 0; min-width: 320px; overflow-x: clip; }
 a { color: inherit; }
 button, a { -webkit-tap-highlight-color: transparent; }
-:focus-visible { outline: 3px solid #2371c6; outline-offset: 3px; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }

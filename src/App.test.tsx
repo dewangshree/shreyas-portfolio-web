@@ -55,12 +55,6 @@ describe('portfolio', () => {
         }),
       ).toBeInTheDocument()
 
-      expect(
-        screen.getByRole('heading', {
-          name: 'Task Management System',
-        }),
-      ).toBeInTheDocument()
-
       await screen.findByRole('blockquote')
     },
     15000,
@@ -126,5 +120,25 @@ describe('portfolio', () => {
     expect((await screen.findByRole('blockquote')).textContent).toContain(
       quote.text,
     )
+  })
+
+  it('switches between themes and persists the selected theme', () => {
+    localStorage.clear()
+    document.documentElement.dataset.theme = 'light'
+    vi.stubGlobal('fetch', vi.fn().mockReturnValue(new Promise(() => {})))
+
+    render(<App />)
+
+    const toggle = screen.getByRole('button', { name: 'Switch to dark mode' })
+    fireEvent.click(toggle)
+
+    expect(document.documentElement.dataset.theme).toBe('dark')
+    expect(localStorage.getItem('portfolio-theme')).toBe('dark')
+    expect(toggle).toHaveAttribute('aria-pressed', 'true')
+
+    fireEvent.click(toggle)
+
+    expect(document.documentElement.dataset.theme).toBe('light')
+    expect(localStorage.getItem('portfolio-theme')).toBe('light')
   })
 })

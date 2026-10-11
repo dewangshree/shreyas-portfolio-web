@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" fill="none">
+  <g stroke="#267fc9" stroke-width="2" opacity=".27"><path d="M80 150l210-120 210 120v240L290 510 80 390V150zM1230 420l185-105 185 105v210l-185 105-185-105V420zM710 620l135-78 135 78v156l-135 78-135-78V620z"/><path d="M500 270h270l75 75m210 275l175-175m-305-75l145 145"/></g>
+  <g fill="#2371c6" opacity=".2"><path d="M80 150l210-120 210 120v240L290 510 80 390V150z"/><path d="M1230 420l185-105 185 105v210l-185 105-185-105V420z"/><path d="M710 620l135-78 135 78v156l-135 78-135-78V620z"/></g>
+  <circle cx="845" cy="345" r="150" stroke="#54b8ff" stroke-width="2" opacity=".2"/>
+</svg>

@@ -17,30 +17,15 @@ pipeline {
             }
         }
 
-        stage('Install') {
+        stage('Verify') {
             steps {
                 sh '''
                     node --version
                     npm --version
                     npm ci --prefer-offline --no-audit --no-fund
+                    npm test
+                    npm run build
                 '''
-            }
-        }
-
-        stage('Test') {
-            steps {
-                sh 'npm test'
-            }
-        }
-
-        stage('Build') {
-            steps {
-                sh 'npm run build'
-            }
-        }
-
-        stage('SonarQube Analysis') {
-            steps {
                 script {
                     def scannerHome = tool 'SonarQube Scanner'
 
@@ -54,18 +39,13 @@ pipeline {
                         """
                     }
                 }
-            }
-        }
-
-        stage('Quality Gate') {
-            steps {
                 timeout(time: 5, unit: 'MINUTES') {
                     waitForQualityGate abortPipeline: true
                 }
             }
         }
 
-        stage('Docker Build & Deploy') {
+        stage('Deploy') {
             steps {
                 sh '''
                     set -e
@@ -104,20 +84,28 @@ pipeline {
                           shreyas-portfolio-frontend:${BUILD_NUMBER}
                     "
 
+                    echo "Frontend server-side Docker deployment successful."
+                '''
+            }
+        }
+
+        stage('Health Check') {
+            steps {
+                sh '''
+                    set -e
+
                     echo "Waiting for frontend container..."
                     sleep 3
 
                     echo "Checking frontend Docker container..."
-
                     ssh -i ~/.ssh/shree shree@54.37.159.71 \
                       'curl --fail --silent --show-error http://127.0.0.1:8083/ > /dev/null'
 
                     echo "Checking public website..."
-
                     curl --fail --silent --show-error \
                       https://shreyasportfolio.hopto.org/ > /dev/null
 
-                    echo "Frontend server-side Docker build and deployment successful."
+                    echo "Frontend health checks successful."
                 '''
             }
         }

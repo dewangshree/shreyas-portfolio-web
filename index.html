@@ -5,6 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Personal developer portfolio of Shreyas Vikrant Dewangswami, Software Developer." />
     <title>Shreyas Vikrant Dewangswami | Software Developer</title>
+    <script>
+      (() => {
+        try {
+          const theme = localStorage.getItem('portfolio-theme') || 'dark'
+          document.documentElement.dataset.theme = theme
+          document.documentElement.style.colorScheme = theme
+          document.documentElement.style.backgroundColor = theme === 'dark' ? '#081525' : '#f7f9fc'
+        } catch {
+          document.documentElement.dataset.theme = 'dark'
+          document.documentElement.style.colorScheme = 'dark'
+          document.documentElement.style.backgroundColor = '#081525'
+        }
+      })()
+    </script>
   </head>
   <body>
     <div id="root"></div>
