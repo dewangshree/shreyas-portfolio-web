@@ -35,3 +35,14 @@ src/
 ```
 
 The portfolio is intentionally frontend-only: authentication, databases, deployment, Docker, and CI/CD are outside this phase.
+
+## Private analytics (optional)
+
+The site is ready for a private Umami instance but sends no analytics until it is configured. Set these deployment environment variables:
+
+```bash
+VITE_UMAMI_WEBSITE_ID=your-umami-website-id
+VITE_UMAMI_SCRIPT_URL=https://your-umami-host/script.js
+```
+
+Umami then records its standard page views (total and unique visitors) and the portfolio sends only `project-click` events with the project name and destination (`card`, `github`, or `live`). No personal visitor data or interview interactions are tracked.

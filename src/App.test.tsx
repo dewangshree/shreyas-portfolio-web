@@ -141,4 +141,36 @@ describe('portfolio', () => {
     expect(document.documentElement.dataset.theme).toBe('light')
     expect(localStorage.getItem('portfolio-theme')).toBe('light')
   })
+
+  it('opens accessible scheduling options and closes them with Escape', () => {
+    vi.stubGlobal('fetch', vi.fn().mockReturnValue(new Promise(() => {})))
+    render(<App />)
+
+    const scheduleButton = screen.getByRole('button', { name: 'Schedule a Conversation' })
+    expect(scheduleButton.closest('#contact')).not.toBeNull()
+    expect(screen.getByRole('link', { name: 'Get in Touch' })).toHaveAttribute('href', 'tel:+919902585770')
+    expect(screen.getByRole('link', { name: 'Email Me' })).toHaveAttribute('href', 'mailto:shreyasdewangswami17@gmail.com')
+    expect(screen.getByRole('link', { name: /View My Work Log/i })).toHaveAttribute('href', 'https://app.notion.com/p/Daily-Work-Log-3f85610e36078134ad8cd52ec8857b5e')
+
+    fireEvent.click(scheduleButton)
+    expect(screen.getByRole('dialog', { name: 'Schedule a conversation' })).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: /Zoom/i })).toHaveAttribute('target', '_blank')
+    expect(screen.getByRole('link', { name: /Zoom/i })).toHaveAttribute('rel', 'noopener noreferrer')
+
+    fireEvent.keyDown(document, { key: 'Escape' })
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
+  })
+
+  it('copies the interview email address', async () => {
+    vi.stubGlobal('fetch', vi.fn().mockReturnValue(new Promise(() => {})))
+    const writeText = vi.fn().mockResolvedValue(undefined)
+    Object.assign(navigator, { clipboard: { writeText } })
+    render(<App />)
+
+    fireEvent.click(screen.getByRole('button', { name: 'Schedule a Conversation' }))
+    fireEvent.click(screen.getByRole('button', { name: 'Copy Email' }))
+
+    await waitFor(() => expect(writeText).toHaveBeenCalledWith('shreyasdewangswami17@gmail.com'))
+    expect(screen.getByRole('button', { name: 'Copied' })).toBeInTheDocument()
+  })
 })
