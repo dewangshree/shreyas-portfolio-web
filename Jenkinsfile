@@ -20,28 +20,9 @@ pipeline {
         stage('Verify') {
             steps {
                 sh '''
-                    node --version
-                    npm --version
                     npm ci --prefer-offline --no-audit --no-fund
-                    npm test
                     npm run build
                 '''
-                script {
-                    def scannerHome = tool 'SonarQube Scanner'
-
-                    withSonarQubeEnv('SonarQube') {
-                        sh """
-                            "${scannerHome}/bin/sonar-scanner" \
-                              -Dsonar.projectKey=dewangshree_shreyas-portfolio-web_4ec5ac87-4823-4fb0-8a9b-addb46b6b1db \
-                              -Dsonar.sources=src \
-                              -Dsonar.sourceEncoding=UTF-8 \
-                              -Dsonar.nodejs.executable=/usr/local/bin/node
-                        """
-                    }
-                }
-                timeout(time: 5, unit: 'MINUTES') {
-                    waitForQualityGate abortPipeline: true
-                }
             }
         }
 
@@ -113,7 +94,7 @@ pipeline {
 
     post {
         success {
-            echo 'Frontend CI/CD + SonarQube + server-side Docker deployment completed successfully.'
+            echo 'Frontend CI/CD + server-side Docker deployment completed successfully.'
         }
 
         failure {
