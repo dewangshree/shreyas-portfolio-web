@@ -1,129 +1,144 @@
-# Shreyas Profile Web
+<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=220&section=header&text=Shreyas%20Portfolio%20Web%20🚀&fontSize=48&fontColor=fff&fontAlignY=38&desc=React%2019%20·%20TypeScript%20·%20Docker%20·%20Jenkins%20CI%2FCD&descAlignY=58&descSize=18&animation=fadeIn" width="100%"/>
 
-A responsive personal portfolio for **Shreyas Vikrant Dewangswami**, built with React 19 and TypeScript. It showcases skills, projects, and professional journey, and features a live **Quote of the Day** served by a companion ASP.NET Core API. The site is containerized with Docker, served by Nginx, and deployed through a Jenkins CI/CD pipeline.
+<div align="center">
 
-**Live site:** [shreyasportfolio.hopto.org](https://shreyasportfolio.hopto.org/)
+[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=22&pause=1000&color=00D9FF&center=true&vCenter=true&random=false&width=700&lines=Responsive+developer+portfolio+%F0%9F%92%BB;Live+Quote+of+the+Day+from+ASP.NET+Core+%E2%9A%A1;Dockerized+%2B+served+with+Nginx+%F0%9F%90%B3;Auto-deployed+with+Jenkins+CI%2FCD+%F0%9F%94%81)](https://git.io/typing-svg)
 
----
+<br/>
 
-## Table of Contents
+[![Live Site](https://img.shields.io/badge/🌐%20LIVE%20SITE-shreyasportfolio.hopto.org-00D9FF?style=for-the-badge&labelColor=1a1a2e)](https://shreyasportfolio.hopto.org/)
 
-- [Features](#features)
-- [Tech Stack](#tech-stack)
-- [Prerequisites](#prerequisites)
-- [Getting Started](#getting-started)
-- [Available Scripts](#available-scripts)
-- [Configuration](#configuration)
-- [Backend Integration](#backend-integration)
-- [Testing and Linting](#testing-and-linting)
-- [Deployment](#deployment)
-- [Project Structure](#project-structure)
-- [Analytics and Privacy](#analytics-and-privacy)
+![React](https://img.shields.io/badge/React%2019-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![TypeScript](https://img.shields.io/badge/TypeScript%206-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite%208-646CFF?style=for-the-badge&logo=vite&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
+![Jenkins](https://img.shields.io/badge/Jenkins-D24939?style=for-the-badge&logo=jenkins&logoColor=white)
+
+</div>
 
 ---
 
-## Features
+## 💫 About the Project
 
-- **Responsive layout** for desktop, tablet, and mobile screens
-- **Portfolio sections:** Hero, About, Journey, Skills, Projects, and Contact
-- **Light and dark themes** with the selected theme saved in `localStorage` and applied before first paint to avoid a flash of the wrong theme
-- **Scroll reveal animations** built on `IntersectionObserver`, automatically disabled for users who prefer reduced motion
-- **Quote of the Day** fetched from a companion ASP.NET Core API through a typed client with request cancellation via `AbortSignal`
-- **Privacy-focused analytics** through an optional, self-hosted Umami instance
-- **Automated CI/CD** with Jenkins, Docker, and post-deployment health checks
+```ts
+const portfolio = {
+  owner:     "Shreyas Vikrant Dewangswami",
+  type:      "Personal Developer Portfolio",
+  frontend:  ["React 19", "TypeScript", "Vite"],
+  backend:   "ASP.NET Core API (Quote of the Day)",
+  devops:    ["Docker", "Nginx", "Jenkins CI/CD"],
+  testing:   ["Vitest", "React Testing Library"],
+  analytics: "Umami (optional, privacy-first)",
+  live:      "https://shreyasportfolio.hopto.org",
+}
+```
 
-## Tech Stack
+---
 
-### Frontend
+## ✨ Features
 
-| Technology  | Version | Purpose                                                       |
-| ----------- | ------- | ------------------------------------------------------------- |
-| React       | 19      | Component-based UI                                            |
-| TypeScript  | 6       | Static typing across components, services, and API contracts  |
-| Vite        | 8       | Development server, `/api` proxy, and production bundling     |
-| React Icons | 5       | Technology, social, and UI icons                              |
-| CSS         | —       | Global styles, theming, and responsive layout                 |
-| Fetch API   | —       | Typed HTTP client for the backend                             |
+<div align="center">
 
-### Testing and Code Quality
+| 🎨 Design | ⚡ Functionality | 🔁 DevOps |
+|:---:|:---:|:---:|
+| Fully responsive layout | Live Quote of the Day API | Multi-stage Docker build |
+| Light & dark themes | Typed fetch client with `AbortSignal` | Nginx static hosting |
+| No theme flash on load | Hero, About, Journey, Skills, Projects, Contact | Jenkins CI/CD pipeline |
+| Scroll-reveal animations | Privacy-first Umami analytics | Automated health checks |
+| Respects reduced motion | Vitest + Testing Library tests | Versioned Docker images |
 
-| Technology                  | Version | Purpose                                  |
-| --------------------------- | ------- | ---------------------------------------- |
-| Vitest                      | 4       | Test runner                              |
-| React Testing Library       | 16      | Component testing                        |
-| jest-dom                    | 6       | Custom DOM matchers                      |
-| jsdom                       | 27      | Browser environment for tests            |
-| Oxlint                      | 1       | Fast linting with React and TypeScript rules |
+</div>
 
-### DevOps and Deployment
+---
 
-| Technology | Purpose                                                      |
-| ---------- | ------------------------------------------------------------ |
-| Docker     | Multi-stage build that compiles the app and packages it for serving |
-| Nginx      | Serves the static production build with SPA route fallback   |
-| Jenkins    | CI/CD pipeline for build verification, deployment, and health checks |
-| Linux      | Server environment hosting the Docker container              |
+## 💻 Tech Stack
 
-### Backend and Analytics
+### 🖥️ Frontend
 
-| Technology         | Purpose                                         |
-| ------------------ | ----------------------------------------------- |
-| ASP.NET Core (C#)  | Companion REST API serving the Quote of the Day |
-| Umami              | Optional, self-hosted, privacy-friendly analytics |
+<div align="center">
 
-## Prerequisites
+[![Frontend](https://skillicons.dev/icons?i=react,ts,vite,html,css&theme=dark)](https://skillicons.dev)
 
-- [Node.js](https://nodejs.org/) 24 or later
-- npm
-- The companion backend API running locally (required only for the live Quote of the Day)
-- Docker (optional, for running the production container locally)
+</div>
 
-## Getting Started
+![React Icons](https://img.shields.io/badge/React%20Icons-E91E63?style=for-the-badge&logo=react&logoColor=white)
+![Fetch API](https://img.shields.io/badge/Fetch%20API-1a1a2e?style=for-the-badge)
+
+### 🧪 Testing & Code Quality
+
+![Vitest](https://img.shields.io/badge/Vitest-6E9F18?style=for-the-badge&logo=vitest&logoColor=white)
+![Testing Library](https://img.shields.io/badge/Testing%20Library-E33332?style=for-the-badge&logo=testinglibrary&logoColor=white)
+![jest-dom](https://img.shields.io/badge/jest--dom-C21325?style=for-the-badge&logo=jest&logoColor=white)
+![jsdom](https://img.shields.io/badge/jsdom-F7DF1E?style=for-the-badge&logoColor=black)
+![Oxlint](https://img.shields.io/badge/Oxlint-00D9FF?style=for-the-badge&labelColor=1a1a2e)
+
+### 🐳 DevOps & Deployment
+
+<div align="center">
+
+[![DevOps](https://skillicons.dev/icons?i=docker,nginx,jenkins,linux,git,github&theme=dark)](https://skillicons.dev)
+
+</div>
+
+### ⚙️ Backend & Analytics
+
+<div align="center">
+
+[![Backend](https://skillicons.dev/icons?i=dotnet,cs&theme=dark)](https://skillicons.dev)
+
+</div>
+
+![ASP.NET Core](https://img.shields.io/badge/ASP.NET%20Core-512BD4?style=for-the-badge&logo=dotnet&logoColor=white)
+![Umami](https://img.shields.io/badge/Umami%20Analytics-000000?style=for-the-badge)
+
+---
+
+## 🚀 Getting Started
+
+> **Prerequisites:** Node.js 24+, npm, and the backend API running locally for live quotes. Docker is optional.
 
 ```bash
-# Clone the repository
+# 1. Clone the repo
 git clone https://github.com/dewangshree/shreyas-portfolio-web.git
 cd shreyas-portfolio-web
 
-# Install dependencies
+# 2. Install dependencies
 npm install
 
-# Start the development server
+# 3. Start the dev server
 npm run dev
 ```
 
-Start the backend API first if you want the Quote of the Day to load live data.
+### 📜 Scripts
 
-## Available Scripts
+| Command | What it does |
+|:---|:---|
+| `npm run dev` | ⚡ Start the Vite dev server |
+| `npm run build` | 🏗️ Type-check with `tsc` and build for production |
+| `npm run preview` | 👀 Preview the production build |
+| `npm test` | 🧪 Run tests with Vitest |
+| `npm run lint` | 🧹 Lint with Oxlint |
 
-| Command           | Description                                          |
-| ----------------- | ---------------------------------------------------- |
-| `npm run dev`     | Starts the Vite development server                   |
-| `npm run build`   | Type-checks with `tsc` and creates a production build |
-| `npm run preview` | Serves the production build locally for review      |
-| `npm test`        | Runs the test suite once with Vitest                 |
-| `npm run lint`    | Lints the codebase with Oxlint                       |
+---
 
-## Configuration
+## 🔧 Configuration
 
-All configuration is supplied through environment variables.
+| Variable | Default | Purpose |
+|:---|:---|:---|
+| `VITE_API_PROXY_TARGET` | `http://localhost:5213` | Backend address for the dev proxy |
+| `VITE_API_BASE_URL` | Same origin | Base URL for API requests |
+| `VITE_UMAMI_WEBSITE_ID` | — | Umami website ID (enables analytics) |
+| `VITE_UMAMI_SCRIPT_URL` | — | Umami tracking script URL |
 
-| Variable                | Required | Default                 | Description                                        |
-| ----------------------- | -------- | ----------------------- | -------------------------------------------------- |
-| `VITE_API_PROXY_TARGET` | No       | `http://localhost:5213` | Backend address the development proxy forwards to  |
-| `VITE_API_BASE_URL`     | No       | Same origin             | Base URL prefixed to API requests                  |
-| `VITE_UMAMI_WEBSITE_ID` | No       | None                    | Umami website ID; enables analytics when set       |
-| `VITE_UMAMI_SCRIPT_URL` | No       | None                    | URL of the Umami tracking script                   |
+---
 
-## Backend Integration
+## 🔗 Backend Integration
 
-The Quote of the Day component calls a single endpoint:
+The Quote of the Day calls one endpoint on the companion ASP.NET Core API:
 
-```
+```http
 GET /api/quotes/today
 ```
-
-The response follows this contract:
 
 ```ts
 interface Quote {
@@ -134,94 +149,87 @@ interface Quote {
 }
 ```
 
-During development, Vite proxies every `/api` request to `http://localhost:5213`, which matches the backend's Development HTTP profile. To use a different local backend, create a `.env.local` file:
+In development, Vite proxies `/api` to `http://localhost:5213`. To use another address, add it to `.env.local`:
 
 ```bash
 VITE_API_PROXY_TARGET=http://localhost:5000
 ```
 
-## Testing and Linting
+---
 
-Tests run in a jsdom environment with React Testing Library and jest-dom matchers, configured in `vite.config.ts` and `src/test/setup.ts`.
+## 🔁 CI/CD Pipeline
 
-```bash
-npm test        # Run the test suite
-npm run lint    # Run Oxlint
+```mermaid
+flowchart LR
+    A[📥 Checkout] --> B[✅ Verify<br/>npm ci + build]
+    B --> C[🐳 Deploy<br/>Docker build + run]
+    C --> D[🩺 Health Check<br/>container + live site]
 ```
 
-## Deployment
+| Stage | What happens |
+|:---|:---|
+| 📥 **Checkout** | Pulls the latest source code |
+| ✅ **Verify** | Installs dependencies and runs a production build |
+| 🐳 **Deploy** | Syncs code to the server, builds a Docker image tagged with the build number, and swaps the running container |
+| 🩺 **Health Check** | Confirms the container and the public site both respond |
 
-### Docker
-
-The `Dockerfile` uses a multi-stage build:
-
-1. **Build stage:** a Node Alpine image installs dependencies with `npm ci` and runs `npm run build`.
-2. **Serve stage:** an Nginx Alpine image serves the compiled `dist` output on port 80, with `try_files` falling back to `index.html` for client-side routes.
-
-To build and run the container locally:
+### 🐳 Run with Docker
 
 ```bash
 docker build -t shreyas-portfolio-frontend .
 docker run -d -p 8080:80 shreyas-portfolio-frontend
 ```
 
-The site is then available at `http://localhost:8080`.
+Open **http://localhost:8080** 🎉
 
-### Jenkins CI/CD
+---
 
-The `Jenkinsfile` defines a pipeline that runs on every build, with concurrent builds disabled and timestamped logs:
-
-| Stage            | What it does                                                                 |
-| ---------------- | ---------------------------------------------------------------------------- |
-| **Checkout**     | Pulls the latest source from the repository                                  |
-| **Verify**       | Installs dependencies with `npm ci` and runs a production build              |
-| **Deploy**       | Syncs the source to the server, builds a versioned Docker image tagged with the build number, and replaces the running container |
-| **Health Check** | Confirms both the container and the public website respond successfully      |
-
-The container runs with `--restart unless-stopped` and is bound to localhost on the server, so all public traffic goes through the server's reverse proxy.
-
-## Project Structure
+## 🗂️ Project Structure
 
 ```text
 .
-├── public/
-│   └── images/              # Profile photo and section backgrounds
+├── public/images/           # 🖼️ Profile photo & section backgrounds
 ├── src/
-│   ├── components/
-│   │   ├── About/
-│   │   ├── Contact/
-│   │   ├── Footer/
-│   │   ├── Header/          # Navigation and theme toggle
-│   │   ├── Hero/
-│   │   ├── Journey/
-│   │   ├── Projects/
-│   │   ├── QuoteOfTheDay/
-│   │   └── Skills/
-│   ├── hooks/               # useScrollReveal
-│   ├── services/            # Quote API client and analytics helper
-│   ├── styles/              # Global styles
-│   ├── test/                # Vitest setup
-│   ├── types/               # API contracts
-│   ├── App.tsx              # Root component
-│   └── main.tsx             # Entry point and Umami loader
-├── Dockerfile               # Multi-stage build and Nginx image
-├── Jenkinsfile              # CI/CD pipeline
-├── nginx.conf               # Nginx SPA configuration
-└── vite.config.ts           # Vite, proxy, and Vitest configuration
+│   ├── components/          # 🧩 Hero, About, Journey, Skills, Projects,
+│   │                        #    Contact, Header, Footer, QuoteOfTheDay
+│   ├── hooks/               # 🪝 useScrollReveal
+│   ├── services/            # 🌐 Quote API client & analytics
+│   ├── styles/              # 🎨 Global styles
+│   ├── test/                # 🧪 Vitest setup
+│   ├── types/               # 📐 API contracts
+│   ├── App.tsx
+│   └── main.tsx
+├── Dockerfile               # 🐳 Multi-stage build
+├── Jenkinsfile              # 🔁 CI/CD pipeline
+├── nginx.conf               # 🌐 SPA routing
+└── vite.config.ts           # ⚡ Vite, proxy & test config
 ```
 
-## Analytics and Privacy
+---
 
-Analytics are **disabled by default**. The Umami script is loaded only when both of the following variables are set at build time:
+## 🔒 Analytics & Privacy
 
-```bash
-VITE_UMAMI_WEBSITE_ID=your-umami-website-id
-VITE_UMAMI_SCRIPT_URL=https://your-umami-host/script.js
-```
+Analytics are **off by default** and turn on only when both Umami variables are set.
 
-When enabled, data collection is limited to:
+| ✅ Tracked | ❌ Not tracked |
+|:---|:---|
+| Page views (total & unique) | Personal visitor data |
+| `project-click` events (project name + `card` / `github` / `live`) | Interview interactions |
 
-- **Page views:** Umami's standard total and unique visitor counts
-- **`project-click` events:** the project name and the link destination (`card`, `github`, or `live`)
+---
 
-No personal visitor data or interview interactions are tracked.
+<div align="center">
+
+### 🌐 Connect With Me
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/Shreyas-Dewangswami)
+[![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/dewangshree)
+[![Email](https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:shreyasdewangswami17@gmail.com)
+
+**Building systems that actually ship** 🚀
+
+⭐ Star this repo if you like it!
+
+<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=120&section=footer&animation=fadeIn" width="100%"/>
+
+</div>
