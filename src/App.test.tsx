@@ -173,4 +173,17 @@ describe('portfolio', () => {
     await waitFor(() => expect(writeText).toHaveBeenCalledWith('shreyasdewangswami17@gmail.com'))
     expect(screen.getByRole('button', { name: 'Copied' })).toBeInTheDocument()
   })
+
+  it('answers an interview question after the typing indicator', async () => {
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({ ok: true, json: async () => quote }))
+    render(<App />)
+
+    const chip = screen.getByRole('button', { name: 'Why should we hire you?' })
+    fireEvent.click(chip)
+
+    expect(screen.getByLabelText('Shreyas is typing')).toBeInTheDocument()
+    expect(await screen.findByText(/I ship things end to end/, {}, { timeout: 3000 })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: /Why should we hire you\?/ })).toBeDisabled()
+    expect(screen.getByText('1/8 answered')).toBeInTheDocument()
+  })
 })

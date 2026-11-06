@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://shreyasportfolio.hopto.org/sitemap.xml

@@ -3,12 +3,13 @@ import { Contact } from './components/Contact/Contact'
 import { Footer } from './components/Footer/Footer'
 import { Header } from './components/Header/Header'
 import { Hero } from './components/Hero/Hero'
+import { Interview } from './components/Interview/Interview'
 import { Projects } from './components/Projects/Projects'
 import { Skills } from './components/Skills/Skills'
 import './App.css'
 
 function App() {
-  return <div className="site-shell"><Header /><main><Hero /><About /><Skills /><Projects /><Contact /></main><Footer /></div>
+  return <div className="site-shell"><Header /><main><Hero /><About /><Skills /><Projects /><Interview /><Contact /></main><Footer /></div>
 }
 
 export default App
