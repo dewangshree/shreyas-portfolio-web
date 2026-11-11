@@ -150,7 +150,7 @@ describe('portfolio', () => {
     expect(scheduleButton.closest('#contact')).not.toBeNull()
     expect(screen.getByRole('link', { name: 'Get in Touch' })).toHaveAttribute('href', 'tel:+919902585770')
     expect(screen.getByRole('link', { name: 'Email Me' })).toHaveAttribute('href', 'mailto:shreyasdewangswami17@gmail.com')
-    expect(screen.getByRole('link', { name: /View My Work Log/i })).toHaveAttribute('href', 'https://app.notion.com/p/Daily-Work-Log-3f85610e36078134ad8cd52ec8857b5e')
+    expect(screen.queryByRole('link', { name: /View My Work Log/i })).not.toBeInTheDocument()
 
     fireEvent.click(scheduleButton)
     expect(screen.getByRole('dialog', { name: 'Schedule a conversation' })).toBeInTheDocument()
@@ -185,5 +185,28 @@ describe('portfolio', () => {
     expect(await screen.findByText(/I ship things end to end/, {}, { timeout: 3000 })).toBeInTheDocument()
     expect(screen.getByRole('button', { name: /Why should we hire you\?/ })).toBeDisabled()
     expect(screen.getByText('1/8 answered')).toBeInTheDocument()
+  })
+
+  it('lists articles in the Writing section with links to their pages', () => {
+    vi.stubGlobal('fetch', vi.fn().mockReturnValue(new Promise(() => {})))
+    render(<App />)
+
+    const link = screen.getByRole('link', { name: /Flaky Playwright Tests Are Telling You Something/ })
+    expect(link.closest('#writing')).not.toBeNull()
+    expect(link).toHaveAttribute('href', '/writing/flaky-playwright-tests')
+  })
+
+  it('renders an article page for a /writing/<slug> path', () => {
+    vi.stubGlobal('fetch', vi.fn().mockReturnValue(new Promise(() => {})))
+    window.history.pushState({}, '', '/writing/flaky-playwright-tests')
+    try {
+      render(<App />)
+      expect(screen.getByRole('heading', { level: 1, name: 'Flaky Playwright Tests Are Telling You Something' })).toBeInTheDocument()
+      expect(screen.getByRole('heading', { name: '1. Stop sleeping, start asserting' })).toBeInTheDocument()
+      expect(screen.getByRole('link', { name: /All writing/ })).toHaveAttribute('href', '/#writing')
+      expect(document.title).toContain('Flaky Playwright Tests')
+    } finally {
+      window.history.pushState({}, '', '/')
+    }
   })
 })

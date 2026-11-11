@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { HiOutlineMoon, HiOutlineSun } from 'react-icons/hi'
 
-const navigation = [['About', '#about'], ['Skills', '#skills'], ['Projects', '#projects'], ['Interview', '#interview'], ['Contact', '#contact']]
+const navigation = [['About', '/#about'], ['Skills', '/#skills'], ['Projects', '/#projects'], ['Writing', '/#writing'], ['Interview', '/#interview'], ['Contact', '/#contact']]
 
 export function Header() {
   const [theme, setTheme] = useState<'light' | 'dark'>(() => document.documentElement.dataset.theme === 'light' ? 'light' : 'dark')
